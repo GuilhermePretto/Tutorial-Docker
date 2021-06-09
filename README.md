@@ -1,1 +1,5 @@
 # Tutorial-Docker
+
+O Docker é um projeto de software livre para automatizar a publicação de sistemas através de contêineres. Os contêineres são autossuficientes, portáteis e podem ser executados na nuvem ou localmente. O uso do Docker pode auxiliar muito no processo de distribuição de aplicações, dispensando todo o processo de configuração de ambiente, o que agiliza a implantação.
+O Docker facilita o processo de publicação de sistemas através do uso de containers. Esses containers carregam a imagem de um sistema operacional configurado previamente pelo desenvolvedor e podem conter ferramentas de desenvolvimento e até mesmo o seu próprio aplicativo. Uma imagem pode ser utilizada em diversos containers, otimizando assim o processo de implantação de software. O desenvolvedor só precisará configurar a imagem contendo sua aplicação uma vez, depois disso basta criar containers que carreguem essa imagem.
+Desse modo, o Docker ajuda o desenvolvedor a ganhar tempo nas publicações, abstraindo toda a parte de configuração, e possibilitando um maior foco no desenvolvimento.
