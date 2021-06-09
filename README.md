@@ -41,7 +41,7 @@ Este comando funciona para a arquitetura x86_64 / amd64.
 Para instalar o Docker em outras distribuições do Linux, ou instalar no ubuntu, mas via pacote DEB e instalação manual, vá para o [manual oficial](https://docs.docker.com/engine/install/) do Docker e escolha sua opção.
 
 ## Windows 
-A instalação no Windows é mais simples, basta acessar o [site](https://www.docker.com/get-started) e fazer o download do executável para Windows.
+A instalação no Windows é mais simples, basta acessar o [site](https://docs.docker.com/docker-for-windows/install/) e fazer o download do executável para Windows.
 Em seguinda, executar e instalar o Docker Desktop. No [site](https://docs.docker.com/docker-for-windows/install/) oficial, estão os requisitos para instalação do Docker no windows.
 
 # Recursos do Docker
@@ -53,3 +53,10 @@ O Docker possui vários recursos para utilização e criação de containers, a 
 
 ## Dockerfile
 Para executarmos os containers do Docker, precisamos de uma imagem, que nada mais é do que uma lista de comandos que nosso container irá executar quando for executado. Essa imagem pode ser obtida por download direto do Docker Hub, que é o repositório oficial de imagens Docker, criadas pela comunidade. Outra forma de se obter uma imagem, é criando ela a partir de um *Dockerfile*, que, assim como a imagem serve base para o container, ele serve de base para a imagem. No dockerfile especificamos qual a imagem base do sistema, o que será executado e tudo o que nossa imagem precisa. Para mais detalhes, acesse o [link](https://docs.docker.com/engine/reference/builder/).
+## Docker Volume
+O Docker Volume é uma forma de salvar dados usados e gerados por containers e compartilhá-los entre eles. Mais informações no [site](https://docs.docker.com/storage/volumes/).
+## Docker Compose
+Em algumas ocasiões, para que uma aplicação funcione, precisamos subir vários containers, cada um com sua funcionalidade, para facilitar isso, existe o Docker Compose. Ele funciona como um "orquestrador" de containers, através dele, podemos gerenciar a execução de vários containers ao mesmo tempo, pelo arquivo *docker-compose.yml*. Mais informações no [site](https://docs.docker.com/compose/).
+## Docker Swarm
+O Swarm é a ferramenta do docker para gerenciamento de *cluster*. Através dele, podemos iniciar um cluster e partir do master e adicionar vários hosts com poucos comandos. Mais informações no [site](https://docs.docker.com/engine/swarm/).
+
