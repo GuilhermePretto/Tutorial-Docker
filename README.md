@@ -20,7 +20,25 @@ Para executarmos os containers do Docker, precisamos de uma imagem, que nada mai
 A instrução FROM é a mais utilizada para a criação de Dockerfiles, isso porque ela é obrigatória, pois é a base do Dockerfile. Com essa instrução, pode-se definir qual será o ponto de partida da imagem que criaremos com o nosso Dockerfile, ou seja, se eu quiser utilizar a imagem do Java para produzir meu container, basta que eu especifique para utilizar a imagem do openjdk como base.
 
 #### RUN 
-A instrução RUN é bem interessante. Ela pode ser executada uma ou mais vezes e, com ela, posso definir quais serão os comandos executados na etapa de criação de camadas da imagem. Essa instrução permite executarmos diversos comandos durante a criação da imagem, como atualizar repositórios, baixar alguma biblioteca, entre muitos outros. Quando utilizarmos essa imagem para a criação de um container, esses comandos não serão mais executados, pois já foram executados no momento de criação da imagem. Um ponto interessante da instrução é que cada vez que ela é utilizada no Dockerfile, gera uma camada de execução que, podem ser reutilizadas em outras criações futuras, sem a necessidade de serem executas novamente. Por exemplo, se uma imagem é criada e o comando RUN é utilizado 3 vezes, porém, após a criação percebeu-se que faltou uma instrução no Dockerfile, quando essa instrução for adicionada e a imagem for gerada novamente, os comandos RUN que já haviam sido executados inicialmente não serão executados de novo, economizando tempo de execução.
+A instrução RUN é bem interessante. Ela pode ser executada uma ou mais vezes e, com ela, posso definir quais serão os comandos executados na etapa de criação de camadas da imagem. Essa instrução permite executarmos diversos comandos durante a criação da imagem, como atualizar repositórios, baixar alguma biblioteca, entre muitos outros. Quando utilizarmos essa imagem para a criação de um container, esses comandos não serão mais executados, pois já foram executados no momento de criação da imagem. Um ponto interessante da instrução é que cada vez que ela é utilizada no Dockerfile, gera uma camada de execução, que pode ser reutilizada em outras criações futuras, sem a necessidade de ser executada novamente. Por exemplo, se uma imagem é criada e o comando RUN é utilizado 3 vezes, porém, após a criação percebeu-se que faltou uma instrução no Dockerfile, quando essa instrução for adicionada e a imagem for gerada novamente, os comandos RUN que já haviam sido executados inicialmente não serão executados de novo, economizando tempo de execução. 
+
+#### CMD e ENTRYPOINT 
+A instrução CMD faz a mesma coisa que a instrução RUN, porém os comandos não são executados na criação da imagem, mas sim na criação do container se não for passado nenhum parâmentro na execução do container, se isso acontecer, o parâmetro sobrescreverá a instrução do CMD. Outra característica é que quando utilizamos várias instruções CMD, elas se sobrescrevem e somente a última é executada. 
+A instrução ENTRYPOINT faz a mesma coisa da instrução CMD, porém sem sobrescrever, ou seja, todos os ENTRYPOINTS são executados normalmente.
+
+#### ADD e COPY 
+A instrução ADD faz a cópia de um arquivo, diretório ou até mesmo o download de uma URL de nossa máquina host e coloca dentro da imagem. Caso o arquivo passado esteja com extensão .tar, a instrução ADD já adiciona o arquivo descompactado dentro da imagem.
+Já a instrução COPY faz apenas a passagem de arquivos ou diretórios do host para a imagem, sem a possibilidade de fazer download de URL.
+
+#### EXPOSE 
+O EXPOSE é responsável para indicar ao Docker quais as portas que o container estará ouvindo por conexões, devemos utilizar as portas tradicionais para as aplicações, como por exemplo em um apache, expor a porta 80, em um mysql expor a porta 3306.
+A opção EXPOSE é diferente da opção -p ou --publish do comando docker container run. O EXPOSE só tem funcionalidade para o Dockerfile, uma vez que o container é criado sem publicar a porta, o docker sabe que o container estará ouvindo as portas indicadas pelo EXPOSE
+
+#### VOLUME 
+Essa instrução cria uma pasta em nosso container que será compartilhada entre o container e o host. Quando utilizamos o comando VOLUME passando uma pasta, essa pasta será criada dentro do container e todos os arquivos criados dentro do containers e armazenados nessa pasta poderão ser acessados pelo host no caminho /var/lib/docker/volumes.
+
+#### WORKDIR
+Essa instrução tem o propósito de definir o nosso ambiente de trabalho. Com ela, definimos onde as instruções CMD, RUN, ENTRYPOINT, ADD e COPY executarão suas tarefas, além de definir o diretório padrão que será aberto ao executarmos o container.
 
 ## Docker Volume
 O Docker Volume é uma forma de salvar dados usados e gerados por containers e compartilhá-los entre eles. Mais informações no [site](https://docs.docker.com/storage/volumes/).
