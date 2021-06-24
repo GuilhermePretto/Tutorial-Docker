@@ -15,6 +15,13 @@ O Docker possui vários recursos para utilização e criação de containers, a 
 
 ## Dockerfile
 Para executarmos os containers do Docker, precisamos de uma imagem, que nada mais é do que uma lista de comandos que nosso container irá executar quando for executado. Essa imagem pode ser obtida por download direto do Docker Hub, que é o repositório oficial de imagens Docker, criadas pela comunidade. Outra forma de se obter uma imagem, é criando ela a partir de um *Dockerfile*, que, assim como a imagem serve base para o container, ele serve de base para a imagem. No dockerfile especificamos qual a imagem base do sistema, o que será executado e tudo o que nossa imagem precisa. Para mais detalhes, acesse o [site](https://docs.docker.com/engine/reference/builder/).
+### Instruções para criação de um container 
+#### FROM 
+A instrução FROM é a mais utilizada para a criação de Dockerfiles, isso porque ela é obrigatória, pois é a base do Dockerfile. Com essa instrução, pode-se definir qual será o ponto de partida da imagem que criaremos com o nosso Dockerfile, ou seja, se eu quiser utilizar a imagem do Java para produzir meu container, basta que eu especifique para utilizar a imagem do openjdk como base.
+
+#### RUN 
+A instrução RUN é bem interessante. Ela pode ser executada uma ou mais vezes e, com ela, posso definir quais serão os comandos executados na etapa de criação de camadas da imagem. Essa instrução permite executarmos diversos comandos durante a criação da imagem, como atualizar repositórios, baixar alguma biblioteca, entre muitos outros. Quando utilizarmos essa imagem para a criação de um container, esses comandos não serão mais executados, pois já foram executados no momento de criação da imagem. Um ponto interessante da instrução é que cada vez que ela é utilizada no Dockerfile, gera uma camada de execução que, podem ser reutilizadas em outras criações futuras, sem a necessidade de serem executas novamente. Por exemplo, se uma imagem é criada e o comando RUN é utilizado 3 vezes, porém, após a criação percebeu-se que faltou uma instrução no Dockerfile, quando essa instrução for adicionada e a imagem for gerada novamente, os comandos RUN que já haviam sido executados inicialmente não serão executados de novo, economizando tempo de execução.
+
 ## Docker Volume
 O Docker Volume é uma forma de salvar dados usados e gerados por containers e compartilhá-los entre eles. Mais informações no [site](https://docs.docker.com/storage/volumes/).
 ## Docker Compose
