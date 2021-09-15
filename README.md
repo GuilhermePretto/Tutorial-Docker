@@ -15,7 +15,7 @@ O Docker possui vários recursos para utilização e criação de containers, a 
 
 ## Dockerfile
 Para executarmos os containers do Docker, precisamos de uma imagem, que nada mais é do que uma lista de comandos que nosso container irá executar quando for executado. Essa imagem pode ser obtida por download direto do Docker Hub, que é o repositório oficial de imagens Docker, criadas pela comunidade. Outra forma de se obter uma imagem, é criando ela a partir de um *Dockerfile*, que, assim como a imagem serve base para o container, ele serve de base para a imagem. No dockerfile especificamos qual a imagem base do sistema, o que será executado e tudo o que nossa imagem precisa. Para mais detalhes, acesse o [site](https://docs.docker.com/engine/reference/builder/).
-### Instruções para criação de um container 
+### Instruções para criação de um Dockerfile 
 #### FROM 
 A instrução FROM é a mais utilizada para a criação de Dockerfiles, isso porque ela é obrigatória, pois é a base do Dockerfile. Com essa instrução, pode-se definir qual será o ponto de partida da imagem que criaremos com o nosso Dockerfile, ou seja, se eu quiser utilizar a imagem do Java para produzir meu container, basta que eu especifique para utilizar a imagem do openjdk como base.
 
@@ -81,8 +81,37 @@ echo \
 Este comando funciona para a arquitetura x86_64 / amd64. 
 Para instalar o Docker em outras distribuições do Linux, ou instalar no ubuntu, mas via pacote DEB e instalação manual, vá para o [manual oficial](https://docs.docker.com/engine/install/) do Docker e escolha sua opção.
 
+Após a instalação, para testar se foi instalado o Docker, rode o seguinte comando: 
+```
+sudo docker --version 
+```
+Você obterá uma saída parecida com a seguinte: 
+``` 
+Docker version 20.10.8, build 3967b7d
+```
+
 ## Windows 
 A instalação no Windows é mais simples, basta acessar o [site](https://docs.docker.com/docker-for-windows/install/) e fazer o download do executável para Windows.
 Em seguinda, executar e instalar o Docker Desktop. No [site](https://docs.docker.com/docker-for-windows/install/) oficial, estão os requisitos para instalação do Docker no windows.
 
+# BRAMS em container
+## Download
+Primeiramente, para poder executar o modelo BRAMS em container, temos que fazer o download da imagem que foi colocada no Docker Hub. Para isso, após ter instalado o Docker, basta rodar o seguinte comando:
+```
+sudo docker pull guilhermepretto/brams:brams5.6
+```
+Esse comando irá baixar a imagem do BRAMS para a sua máquina.
+Para rodar essa imagem, é necessário o arquivo RAMSIN, o qual pode ser criado e editado através do programa BRABU, o qual possui versão em container e versão Web. A versão em container possui funcionalidades e variáveis mais avançadas, as quais, para uma primeira execução de teste, talvez não seja, necessárias. Dessa forma, aconselha-se utilizar a versão Web, encontrada no seguinte link: [BRABU](http://www.cempa.ufg.br/brabu/)
 
+Para baixar a imagem do BRABU em container, digite o seguinte comando:
+```
+sudo docker pull guilhermepretto/brams:brabu3.5
+```
+## Execução
+Para a execução, é necessário estar dentro da pasta do modelo de testes, pois o container precisa mapear as pastas datain, dataout, shared_datain e tables, além de ter o arquivo RAMSIN para o teste. Estando dentro da pasta de testes, basta rodar o comando: 
+```
+sudo docker run --rm -v $PWD/datain:/root/bin/datain -v $PWD/dataout:/root/bin/dataout -v $PWD/shared_datain:/root/bin/shared_datain -v $PWD/tables:/root/bin/tables --name brams guilhermepretto/brams:brams5.6 /root/run-brams -np 2   -hosts localhost:2
+```
+Este comando irá rodar o container do BRAMS a partir do arquivo RAMSIN base e das tabelas de exemplo. Os arquivos de saída ficam na pasta dataout.
+
+## Pós processamento (GrADS)
