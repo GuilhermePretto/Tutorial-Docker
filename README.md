@@ -114,4 +114,3 @@ sudo docker run --rm -v $PWD/datain:/root/bin/datain -v $PWD/dataout:/root/bin/d
 ```
 Este comando irá rodar o container do BRAMS a partir do arquivo RAMSIN base e das tabelas de exemplo. Os arquivos de saída ficam na pasta dataout.
 
-## Pós processamento (GrADS)
