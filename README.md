@@ -114,3 +114,9 @@ sudo docker run --rm -v $PWD/datain:/root/bin/datain -v $PWD/dataout:/root/bin/d
 ```
 Este comando irá rodar o container do BRAMS a partir do arquivo RAMSIN base e das tabelas de exemplo. Os arquivos de saída ficam na pasta dataout.
 
+## Pós Processamento
+Para fazer o pós processamento, é necessário ter o GrADS instalado, como é um sistema bem simples, resolvemos não colocar em container. Para instalar, basta rodar o seguinte comando:
+```
+apt-get install grads
+```
+Este comando deve baixar e instalar o GrADS na máquina. Para rodar, basta digitar "grads" no terminal que o programa abrirá. No próprio [site](http://cola.gmu.edu/grads/downloads.php), é possível baixar um exemplo, onde tem um tutorial de como usar algumas das principais funções do GrADS. É só baixar o arquivo "example.tar.gz" na seção de Arquivos Suplementares. 
